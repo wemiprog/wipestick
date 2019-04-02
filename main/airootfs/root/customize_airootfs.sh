@@ -23,7 +23,7 @@ systemctl enable pacman-init.service choose-mirror.service
 systemctl set-default multi-user.target
 
 # Create service file
-# - Autostarts the skript wipe-sda
+# - Autostarts the script wipe-sda
 # - Enables in- and output on tty2
 cat << EOF >> /etc/systemd/system/wipe-sda.service
 [Unit]
@@ -42,4 +42,25 @@ TTYVHangup=yes
 WantedBy=default.target
 EOF
 
+# Create wipe-script itself
+cat << EOF >> /usr/bin/wipe-sda
+#!/bin/bash
+echo "Start script in 2s"           # Ensures booted up system
+sleep 2
+chvt 2                              # Change userview to tty2
+dialog --msgbox "If you click OK, device will wipe it's SSD." 20 60
+hdparm -I /dev/sda                  # Execute wipetool once before suspending
+rtcwake -m mem -s 1                 # Suspend with auto wakeup after one second
+sleep 1                             # Wait a second after suspend wakeup
+# Set user password (necessary by specification)
+hdparm --user-master u --security-set-pass wipe /dev/sda
+# Execute wipe itself
+time hdparm --user-master u --security-erase wipe /dev/sda
+# Inform user
+dialog --msgbox "Wipe should have worked. Device will now reboot! If Notebook doesn't boot anymore it has worked :)" 20 60
+reboot
+EOF
 
+# Give execution permission and enable as startup service
+chmod 777 /usr/bin/wipe-sda
+systemctl enable wipe-sda.service

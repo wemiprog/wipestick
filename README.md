@@ -38,3 +38,6 @@ lsblk       # Find out which /dev/... your USB device is and use it for of= in t
 dd bs=4M if=wipestick-2019.04.03-x86_64.iso of=/dev/sdb oflag=sync status=progress
 ```
 For the if= parameter, use tab to complete your current date ;)
+
+## Customize
+If you need to wipe another disk than /dev/sda, look at main/airootfs/root/customize_airootfs.sh

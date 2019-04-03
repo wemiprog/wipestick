@@ -46,6 +46,13 @@ dd bs=4M if=wipestick-2019.04.03-x86_64.iso of=/dev/sdb oflag=sync status=progre
 ```
 For the if= parameter, use tab to complete your current date ;)
 
+### Wipe
+The wipe process should be self-explaining. But important.
+The stick is secure boot capable. But the first time booting you need to use the hashtool.
+It will start automatically, then you have to select "Enroll hash".
+Now select "vmlinuz.efi", and confirm. Then do it again with "loader.efi".
+Now exit the tool and it should boot. Else reboot and try again.
+
 ## Customize
 If you need to wipe another disk than /dev/sda, look at main/airootfs/root/customize_airootfs.sh
 

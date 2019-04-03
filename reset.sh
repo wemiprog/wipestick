@@ -7,7 +7,7 @@ git pull
 git reset --hard HEAD
 chmod +x start.sh
 
-cat << SCRIPT >> ../renewPermissions
+cat << SCRIPT > ../renewPermissions
 #!/bin/bash
 sleep 1
 chmod +x wipestick/reset.sh

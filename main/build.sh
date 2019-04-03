@@ -2,10 +2,10 @@
 
 set -e -u
 
-iso_name=archlinux
-iso_label="ARCH_$(date +%Y%m)"
-iso_publisher="Arch Linux <http://www.archlinux.org>"
-iso_application="Arch Linux Live/Rescue CD"
+iso_name=wipestick
+iso_label="WIPE_$(date +%Y%m)"
+iso_publisher="Wemiprog <https://github.com/wemiprog>"
+iso_application="Wipe stick for SSDs"
 iso_version=$(date +%Y.%m.%d)
 install_dir=arch
 work_dir=work
@@ -153,8 +153,8 @@ make_isolinux() {
 # Prepare /EFI
 make_efi() {
     mkdir -p ${work_dir}/iso/EFI/boot
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
+    cp $PWD/../uefi-files/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
+    cp $PWD/../uefi-files/HashTool.efi ${work_dir}/iso/EFI/boot/
 
     cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
 
@@ -184,14 +184,16 @@ make_efiboot() {
 
     mkdir -p ${work_dir}/efiboot/EFI/archiso
     cp ${work_dir}/iso/${install_dir}/boot/x86_64/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
+    cp ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi ${work_dir}/iso/EFI/boot/loader.efi
     cp ${work_dir}/iso/${install_dir}/boot/x86_64/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
 
     cp ${work_dir}/iso/${install_dir}/boot/intel_ucode.img ${work_dir}/efiboot/EFI/archiso/intel_ucode.img
     cp ${work_dir}/iso/${install_dir}/boot/amd_ucode.img ${work_dir}/efiboot/EFI/archiso/amd_ucode.img
 
     mkdir -p ${work_dir}/efiboot/EFI/boot
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
+    cp $PWD/../uefi-files/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
+    cp $PWD/../uefi-files/HashTool.efi ${work_dir}/efiboot/EFI/boot/
+    cp ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi ${work_dir}/efiboot/EFI/boot/
 
     cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
 

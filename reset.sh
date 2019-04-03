@@ -10,7 +10,6 @@ chmod +x start.sh
 cat << SCRIPT > ../renewPermissions
 #!/bin/bash
 sleep 1
-ls
 chmod +x reset.sh
 SCRIPT
 

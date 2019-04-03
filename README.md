@@ -1,7 +1,8 @@
 # Wipestick
 A simple archbased liveboot stick which wipes /dev/sda SSDs
 
-## Prepare system
+## HOW TO
+### Prepare system
 First, you need an installed arch. If you haven't already, read [Install Script](PREPARE.md) to install\
 Now, install archiso package from official repo:
 ```bash
@@ -10,9 +11,26 @@ pacman -S archiso
 
 Important: Work as root!
 
-## Create ISO
+### Create ISO
+Now go to your home and clone this repo:
+```sh
+cd
+git clone https://github.com/wemiprog/wipestick
+cd wipestick
+```
 
-## Flash ISO
+To create the iso, execute start.sh. But because permissions are needed, I recommend following:
+```sh
+chmod +x reset.sh
+./reset.sh
+./start.sh
+```
+
+The reset script ensures, that you are using the latest version of the repo and cleans all other files you've added to this folder.
+
+If your internet connection is working, you should have a .iso file in this folder within 5-10 minutes.
+
+### Flash ISO
 You should still be in the folder "wipestick".
 Now put the following command:
 ```bash

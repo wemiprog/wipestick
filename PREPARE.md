@@ -132,7 +132,7 @@ telinit 6                       # Reboot
 If after the reboot our arch can't boot (grub doesn't appear), do that:
 - Open BIOS Settings (F2 or similar during boot)
 - Go to boot sequence > Boot List option -> Add Boot Option
-- Select File > Go to EFI > boot > bootx64.efi
+- Select File > Go to EFI > grub_uefi > bootx64.efi
 - Save all that and try again
 
 ### In the new system

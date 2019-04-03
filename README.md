@@ -33,7 +33,7 @@ If your internet connection is working, you should have a .iso file in this fold
 ### Flash ISO
 You should still be in the folder "wipestick".
 Now put the following command:
-```bash
+```sh
 lsblk       # Find out which /dev/... your USB device is and use it for of= in the command below
 dd bs=4M if=wipestick-2019.04.03-x86_64.iso of=/dev/sdb oflag=sync status=progress
 ```

@@ -1,0 +1,77 @@
+Arch - Homesystem
+
+"Base-System Installation
+https://www.tecmint.com/arch-linux-installation-and-configuration-guide/"
+
+- Herunterladen und mit Etcher auf Stick flashen
+  "https://www.archlinux.de/download
+  https://www.balena.io/etcher/"
+- Netzwerk anhängen und DHCP starten
+  "dhcpcd						# Startet dhcp-client
+  ping google.com				# Check if network connected 🕸"
+- Grundkonfiguration
+  "loadkeys de_CH-latin1 			# Load swiss keyboard
+  pacman -Sy					# Update package 📦 list"
+- Partitionierung
+  "cfdisk /dev/sda				# Start partitioning tool 🛠
+  # Make sure that gpt is showed on top
+  # Delete all partitions with ↑↓←→ [enter]
+  # Create following partitions:
+  #   1- 300M size, EFI System type
+  #   2- 8G size, Linux swap type
+  #   3 - Remaining space-size, Linux filesystem type
+  # Now write, type yes and quit"
+- Dateisysteme erstellen, mounten
+  "mkfs.fat -F32 /dev/sda1			# Create EFI-Filesystem
+  mkfs.ext4 /dev/sda3			# Create main filesystem
+  mkswap /dev/sda2				# Create swap filesystem
+  mount /dev/sda3 /mnt			# Mount main partition
+  swapon /dev/sda2				# Enable swap"
+- Basissystem installieren
+  "pacstrap /mnt base base-devel	# Install basic packages
+  # Generate mount script for disks
+  genfstab -U -p /mnt >> /mnt/etc/fstab"
+- Systemkonfiguration
+  "arch-chroot /mnt				# Login to new system
+  echo "eda-wipe" > /etc/hostname	# Set hostname
+  pacman -S vim					# Install vim
+  vim /etc/locale.gen				# File with locales
+  # uncomment all needed languages and save file (de_CH.UTF-8)
+  locale-gen					# Generate selected locales
+  echo LANG=de_CH.UTF-8 > /etc/locale.conf
+  # Set locale time to zurich
+  ln -s /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+  hwclock --systohc --utc			# Set hardware clock
+  vim /etc/pacman.conf			# Uncomment [multilib] and line below
+  passwd [enter] edawipe19		# Set password
+  # Add a non-admin user
+  useradd -mg users -G wheel,storage,power -s /bin/bash install
+  passwd install [enter] install
+  # Give install ability to execute root commands
+  pacman -S sudo
+  vim /etc/sudoers				#  copy line with "root" and change to "install"
+  cat << EOF >> /etc/vconsole.conf	# Set swiss keyboard as default
+  KEYMAP=de_CH-latin1
+  EOF"
+- Bootloader
+  "# Install packets and mount efi-drive
+  pacman -S grub efibootmgr dosfstools os-prober mtools
+  mkdir /boot/EFI
+  mount /dev/sda1 /boot/EFI		# If not working reboot
+  # Install an efi-grub
+  grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+  grub-mkconfig -o /boot/grub/grub.cfg"
+- Exit - Installation abgeschlossen
+  "exit
+  umount -a
+  telinit 6"
+- BIOS-Korrektur
+  "Ins BIOS mit F2 gehen.
+  Dort "Add Boot Option"
+  Danach navigieren bis GRUB gefunden wird
+  Namen hinzufügen und "Add" klicken, als Prio festlegen"
+- Im Neuen System
+  "systemctl start dhcpcd
+  systemctl enable dhcpcd
+  ping google.com
+  "

@@ -6,3 +6,4 @@ git reset --hard HEAD
 git pull
 git reset --hard HEAD
 chmod +x start.sh
+chmod +x reset.sh

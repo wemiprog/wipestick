@@ -77,7 +77,8 @@ vim /etc/locale.gen             # -> Uncomment all you need
 locale-gen                      # Generate the selected locales
 echo LANG=de_CH.UTF-8 > /etc/locale.conf
 # Set time zone
-ln -s /usr/share/zoneinfo/Europe/Zurich /etc/localetime
+rm /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 hwclock --systohc --utc         # Set hardware clock
 # Set default keyboard
 cat << EOF >> /etc/vconsole.conf

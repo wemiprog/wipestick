@@ -28,14 +28,14 @@ lsblk                   # If it's not /dev/sda or to check partitioning
 Within cfdisk do following
 - Delete all partitions with ←↑→↓ and \[enter\]
 - Create following partitions
-  1. EFI partition
-    Size: 300M
+  1. EFI partition\
+    Size: 300M\
     Type: EFI System
-  2. Swap partition
-    Size: 8G
+  2. Swap partition\
+    Size: 8G\
     Type: Linux swap
-  3. System partition
-    Size: default
+  3. System partition\
+    Size: default\
     Type: default
 - Select write command and type "yes"
 - Quit the tool

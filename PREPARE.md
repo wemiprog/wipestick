@@ -100,5 +100,48 @@ vim /etc/sudoers
 ### Install bootloader
 Because we want our system to boot, we'll install a bootloader:
 ```sh
+pacman -S grub efibootmgr dosfstools os-prober mtools
+mkdir /boot/EFI
+mount /dev/sda1 /boot/EFI       # If not working go to "Problem"
+# Install efi-grub
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+```
 
+#### Problem
+If it does not work, follow the steps at Reboot.\
+Then boot again to USB and put those commands:
+```sh
+mount /dev/sda3 /mnt
+arch-chroot /mnt
+mount /dev/sda1 /boot/EFI
+```
+And go on ...
+
+### Reboot
+We can't directly leave our system, first we should do following:
+```sh
+exit                            # Leave the chroot
+umount -a                       # Automatically unmount everything
+telinit 6                       # Reboot
+```
+
+### BIOS fail workaround
+If after the reboot our arch can't boot (grub doesn't appear), do that:
+- Open BIOS Settings (F2 or similar during boot)
+- Go to boot sequence > Boot List option -> Add Boot Option
+- Select File > Go to EFI > boot > bootx64.efi
+- Save all that and try again
+
+### In the new system
+First we activate the dhcp service:
+```sh
+systemctl start dhcpcd
+systemctl enable dhcpcd
+ping google.com                 # And wait 'till it works
+```
+
+Now you can do whatever you want. I recommend to install a few packages of your choice, at least this:
+```sh
+pacman -Sy git
 ```

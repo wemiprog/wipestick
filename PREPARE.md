@@ -7,8 +7,9 @@ Download an arch ISO:\
 Download and install Etcher:\
 [balena.io/etcher](https://www.balena.io/etcher/)
 
-Flash the ISO to an USB disk and boot PC from it.
+Flash the ISO to an USB disk and boot PC from it.\
 You have to **disable secureboot** for installing arch!
+But leave UEFI enabled!
 
 ## Install system
 ### Attach network and load your keys

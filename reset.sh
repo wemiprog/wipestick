@@ -11,7 +11,7 @@ cat << SCRIPT > ../renewPermissions
 #!/bin/bash
 sleep 1
 ls
-chmod +x wipestick/reset.sh
+chmod +x reset.sh
 SCRIPT
 
 chmod +x ../renewPermissions

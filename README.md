@@ -30,6 +30,13 @@ The reset script ensures, that you are using the latest version of the repo and 
 
 If your internet connection is working, you should have a .iso file in this folder within 5-10 minutes.
 
+#### Problem
+If the skript breaks and tells "cp *.iso" failed, try  executing the following 3-5 times:
+```sh
+./reset.sh
+./start.sh
+```
+
 ### Flash ISO
 You should still be in the folder "wipestick".
 Now put the following command:
@@ -41,3 +48,27 @@ For the if= parameter, use tab to complete your current date ;)
 
 ## Customize
 If you need to wipe another disk than /dev/sda, look at main/airootfs/root/customize_airootfs.sh
+
+## Sources
+The files in this repo in the subfolder are described in Source.md
+
+Other sources are here:
+Secure Erase
+https://www.thomas-krenn.com/de/wiki/SSD_Secure_Erase
+
+Systemd Service interaktiv
+https://alan-mushi.github.io/2014/10/26/execute-an-interactive-script-at-boot-with-systemd.html
+https://arashmilani.com/post?id=86
+
+Arch UEFI Install
+https://www.tecmint.com/arch-linux-installation-and-configuration-guide/
+
+Bash Dialog
+https://wiki.ubuntuusers.de/Howto/Dialog-Optionen/
+https://linuxgazette.net/101/sunil.html
+
+Secure Boot
+https://bentley.link/secureboot/
+
+Log Disable
+https://bbs.archlinux.org/viewtopic.php?id=184678

@@ -9,9 +9,9 @@ chmod +x start.sh
 
 cat << SCRIPT >> ../renewPermissions
 #!/bin/bash
+sleep 1
 chmod +x wipestick/reset.sh
 SCRIPT
 
 chmod +x ../renewPermissions
-pacman -S at --noconfirm >> /dev/null
-at -f ../renewPermissions -t now +1 second
+../renewPermissions

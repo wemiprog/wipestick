@@ -48,7 +48,9 @@ cat << EOF >> /usr/bin/wipe-sda
 echo "Start script in 2s"           # Ensures booted up system
 sleep 2
 chvt 2                              # Change userview to tty2
-dialog --msgbox "If you click OK, device will wipe it's SSD." 20 60
+reboot --help
+time
+dialog --msgbox "Click OK to wipe the internal SSD \n(/dev/sda/)" 20 60
 hdparm -I /dev/sda                  # Execute wipetool once before suspending
 rtcwake -m mem -s 1                 # Suspend with auto wakeup after one second
 sleep 1                             # Wait a second after suspend wakeup
@@ -57,7 +59,7 @@ hdparm --user-master u --security-set-pass wipe /dev/sda
 # Execute wipe itself
 time hdparm --user-master u --security-erase wipe /dev/sda
 # Inform user
-dialog --msgbox "Wipe should have worked. Device will now reboot! If Notebook doesn't boot anymore it has worked :)" 20 60
+dialog --msgbox "Wipe should have worked. Device will now reboot! \nIf the notebook doesn't boot anymore it has worked." 20 60
 reboot
 EOF
 

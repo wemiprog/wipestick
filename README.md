@@ -31,7 +31,7 @@ The reset script ensures, that you are using the latest version of the repo and 
 If your internet connection is working, you should have a .iso file in this folder within 5-10 minutes.
 
 #### Problem
-If the skript breaks and tells "cp *.iso" failed, try  executing the following 3-5 times:
+If the script breaks and tells "cp *.iso" failed, try  executing the following commands 3-5 times:
 ```sh
 ./reset.sh
 ./start.sh

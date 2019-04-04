@@ -3,7 +3,7 @@ A simple archbased liveboot stick which wipes /dev/sda SSDs
 
 ## HOW TO
 ### Prepare system
-First, you need an installed arch. If you haven't already, read [Install Script](PREPARE.md) to install\
+First, you need an installed Arch Linux. If you haven't already, read [Install Script](PREPARE.md) to install\
 Now, install archiso package from official repo:
 ```bash
 pacman -S archiso

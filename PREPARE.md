@@ -138,6 +138,7 @@ If after the reboot our arch can't boot (grub doesn't appear), do that:
 
 ### In the new system
 First we activate the dhcp service:
+Login with the user "root" and your password
 ```sh
 systemctl start dhcpcd
 systemctl enable dhcpcd

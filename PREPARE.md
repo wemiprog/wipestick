@@ -94,8 +94,7 @@ passwd [enter]                  # Set your password and remember
 # Add a non-root user
 useradd -mg users -G wheel,storage,power -s /bin/bash install
 passwd install [enter]          # Set a user password
-# Install and configure sudo
-pacman -S sudo
+# Configure sudo
 vim /etc/sudoers                
 # -> Duplicate line with "root" and exchange root with "install"
 ```

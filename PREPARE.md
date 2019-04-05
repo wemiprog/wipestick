@@ -133,8 +133,8 @@ telinit 6                       # Reboot
 If after the reboot our arch can't boot (grub doesn't appear), do that:
 - Open BIOS Settings (F2 or similar during boot)
 - Go to boot sequence > Boot List option -> Add Boot Option
-- Select File > Go to EFI > grub_uefi > bootx64.efi
-- Save all that and try again
+- Select File > Go to EFI > grub_uefi > bootx64.efi, might be slightly different named
+- Complete all fields as you want, save all that and try again
 
 ### In the new system
 First we activate the dhcp service:

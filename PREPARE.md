@@ -97,6 +97,7 @@ passwd install [enter]          # Set a user password
 # Configure sudo
 vim /etc/sudoers                
 # -> Duplicate line with "root" and exchange root with "install"
+# To exit this file, enter :wq!
 ```
 
 ### Install bootloader

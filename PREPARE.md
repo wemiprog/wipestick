@@ -27,6 +27,7 @@ cfdisk /dev/sda         # Assuming your disk is named /dev/sda
 lsblk                   # If it's not /dev/sda or to check partitioning
 ```
 Within cfdisk do following
+- If there's a popup, choose "gpt"
 - Delete all partitions with ←↑→↓ and \[enter\]
 - Create following partitions
   1. EFI partition\

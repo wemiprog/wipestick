@@ -57,12 +57,21 @@ dialog --msgbox "Click OK to wipe the internal SSD \n(/dev/sda/)" 20 60
 hdparm -I /dev/sda                  # Execute wipetool once before suspending
 rtcwake -m mem -s 1                 # Suspend with auto wakeup after one second
 sleep 1                             # Wait a second after suspend wakeup
+( # BEGIN SUBSCRIPT
+set -e                              # Cancel subscript if error
 # Set user password (necessary by specification)
 hdparm --user-master u --security-set-pass wipe /dev/sda
 # Execute wipe itself
 time hdparm --user-master u --security-erase wipe /dev/sda
+) # END SUBSCRIPT
+errorCode=$?
 # Inform user
-dialog --title "Wipe successful" --msgbox " Device wipe is successful! \n\n Please take a screenshot and send it to your system administrator \n\n MAC:  \$mac \n\$uuid \n\n\n Now click OK to reboot your device" 30 90
+if [ $errorCode -ne 0 ]; then # If problem
+  dialog --title "FAILED!" --msgbox "There is an error ( $errorCode ) \n Please reboot and try again." 20 50
+  exit $errorCode
+else
+  dialog --title "Wipe successful" --msgbox " Device wipe is successful! \n\n Please take a screenshot and send it to your system administrator \n\n MAC:  \$mac \n\$uuid \n\n\n Now click OK to reboot your device" 30 90
+fi
 reboot
 EOF
 

@@ -48,8 +48,8 @@ cat << EOF >> /usr/bin/wipe-sda
 echo "Start script in 2s"           # Ensures booted up system
 sleep 2
 # Read system Info and prepare messages
-mac="$(cat /sys/class/net/*/address)" # Find all MACs
-uuid="$(dmidecode | grep UUID)"     # Read UUID
+mac="\$(cat /sys/class/net/*/address)" # Find all MACs
+uuid="\$(dmidecode | grep UUID)"     # Read UUID
 chvt 2                              # Change userview to tty2
 reboot --help
 time
@@ -62,7 +62,7 @@ hdparm --user-master u --security-set-pass wipe /dev/sda
 # Execute wipe itself
 time hdparm --user-master u --security-erase wipe /dev/sda
 # Inform user
-dialog --title "Wipe successful" --msgbox " Device wipe is successful! \n\n Please take a screenshot and send it to your system administrator \n\n MAC:  $mac \n$uuid \n\n\n Now click OK to reboot your device" 30 90
+dialog --title "Wipe successful" --msgbox " Device wipe is successful! \n\n Please take a screenshot and send it to your system administrator \n\n MAC:  \$mac \n\$uuid \n\n\n Now click OK to reboot your device" 30 90
 reboot
 EOF
 

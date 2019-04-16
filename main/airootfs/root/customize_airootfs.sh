@@ -64,11 +64,11 @@ hdparm --user-master u --security-set-pass wipe /dev/sda
 # Execute wipe itself
 time hdparm --user-master u --security-erase wipe /dev/sda
 ) # END SUBSCRIPT
-errorCode=$?
+errorCode=\$?
 # Inform user
-if [ $errorCode -ne 0 ]; then # If problem
-  dialog --title "FAILED!" --msgbox "There is an error ( $errorCode ) \n Please reboot and try again." 20 50
-  exit $errorCode
+if [ \$errorCode -ne 0 ]; then # If problem
+  dialog --title "FAILED!" --msgbox "There is an error ( \$errorCode ) \n Please reboot and try again." 20 50
+  exit \$errorCode
 else
   dialog --title "Wipe successful" --msgbox " Device wipe is successful! \n\n Please take a screenshot and send it to your system administrator \n\n MAC:  \$mac \n\$uuid \n\n\n Now click OK to reboot your device" 30 90
 fi

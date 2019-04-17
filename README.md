@@ -1,3 +1,4 @@
+[![HitCount](http://hits.dwyl.io/wemiprog/wipestick.svg)](http://hits.dwyl.io/wemiprog/wipestick)
 # Wipestick
 A simple archbased liveboot stick which wipes /dev/sda SSDs
 
